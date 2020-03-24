@@ -1,21 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_net_frontend/models/user.dart';
-import 'package:health_net_frontend/repository/repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_net_frontend/blocs/main_screen/bloc/main_screen_bloc.dart';
 import 'package:health_net_frontend/screens/main_screen/components/consumer/main_screen_consumer.dart';
-import 'package:health_net_frontend/screens/main_screen/components/logout_dialog/logout_dialog.dart';
+import 'package:health_net_frontend/screens/main_screen/components/ui/bottomAppBar/bottom_appBar.dart';
 
+import 'components/ui/actionButton/action_button.dart';
 class MainScreen extends StatelessWidget{
   final String _email;
-  final HealthNetRepository _repository;
-
-  const MainScreen(this._email,this._repository,{Key key}) : super(key: key);
+  const MainScreen(this._email,{Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Theme.of(context).backgroundColor,
       //BLoC needed
-      body:MainScreenConsumer(),
+      body:BlocProvider.value(
+        value: BlocProvider.of<MainScreenBloc>(context),
+        child:MainScreenConsumer()),
+
+      bottomNavigationBar:BlocProvider.value(
+        value: BlocProvider.of<MainScreenBloc>(context),
+        child:HealthNetBottomAppBar(),),
+      
+      floatingActionButton: BlocProvider.value(
+        value: BlocProvider.of<MainScreenBloc>(context),
+        child: HealthNetActionButton(),
+        ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
-  }
-  
-}
+      }
+      
+    }

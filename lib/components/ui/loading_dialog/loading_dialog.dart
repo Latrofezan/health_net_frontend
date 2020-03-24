@@ -10,10 +10,14 @@ class LoadingDialog {
       _showing = true;
       showDialog(
         context: context,
-        builder: (context) => Dialog(
+        barrierDismissible: false,
+        builder: (context) => WillPopScope(
+          child: Dialog(
+            elevation: 0,
           backgroundColor: Colors.transparent,
           child: LoadingElement(),
         ),
+          onWillPop:()async=>false)
       );
     }
   }

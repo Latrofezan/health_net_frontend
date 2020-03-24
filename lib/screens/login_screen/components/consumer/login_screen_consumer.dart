@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_net_frontend/blocs/authentication/authentication_bloc.dart';
-import 'package:health_net_frontend/components/ui/loading_dialog/loading_dialog.dart';
 import 'package:health_net_frontend/components/ui/loading_element/loading_element.dart';
 import 'package:health_net_frontend/components/ui/logo/healthnet_logo.dart';
 import 'package:health_net_frontend/screens/login_screen/components/ui/login_form/login_form.dart';
@@ -39,6 +38,7 @@ class AuthenticationConsumer extends StatefulWidget {
           Theme.of(context).primaryColor,
           Theme.of(context).primaryColorLight
         ],
+        stops: [0.2,1.0],
         begin: FractionalOffset.topCenter,
         end: FractionalOffset.bottomCenter,
       )),
@@ -47,23 +47,22 @@ class AuthenticationConsumer extends StatefulWidget {
         listener: (context, state) {
           if (state is AuthenticationFailed) {
             BlocProvider.of<AuthenticationBloc>(context).add(AppStarted());
-            LoadingDialog.hide(context);
             Flushbar(
-              message: "Invalid credentials. Please, try again",
+              title: (state.statusCode==401)?null:"Error "+state.statusCode.toString(),
+              message:(state.statusCode==401)?"Invalid credentials. Please, try again":state.errorMessage,
               icon: Icon(
                 Icons.error_outline,
                 size: 28.0,
                 color: Colors.white,
               ),
-              duration: Duration(seconds: 3),
-              backgroundColor: Colors.red,
+              duration: Duration(seconds: 5),
+              backgroundColor: Theme.of(context).errorColor,
               borderRadius: 8,
               margin: EdgeInsets.all(8),
             )..show(context);
           }
 
           if(state is AuthenticationAuthenticated){
-            LoadingDialog.hide(context);
             Navigator.of(context).pushReplacementNamed('main',arguments:MainScreenArguments(state.healthNetRepository, state.email));
             BlocProvider.of<AuthenticationBloc>(context).close();
           }
@@ -77,24 +76,28 @@ class AuthenticationConsumer extends StatefulWidget {
                 children: <Widget>[
                   HealthNetLogo(
                     padding: EdgeInsets.only(top:32),
-                    height: 150,
-                    width: 150,
+                    height: 200,
+                    width: 200,
                   ),
 
                   Padding(
                     padding: EdgeInsets.all(8).copyWith(bottom:32),
-                    child: Text("HEALTH-NET",style:Theme.of(context).textTheme.display1.copyWith(color:Theme.of(context).backgroundColor, fontWeight: FontWeight.bold),),
+                    child: Text("HEALTH-NET",style:Theme.of(context).textTheme.display2.copyWith(color:Theme.of(context).backgroundColor, fontWeight: FontWeight.bold),),
                   ),
 
                   BlocProvider.value(
                     value: BlocProvider.of<AuthenticationBloc>(context),
-                    child: LoginForm(),
+                    child: LoginForm(height: 370,width: 340,),
                     )
               ],
               )
             );
           }
-          return Container(height: 0.0,width: 0.0,);
+
+          /*if(state is AuthenticationValidating){
+            return LoadingElement();
+          }*/
+          return LoadingElement();;
         },
       ),
     );

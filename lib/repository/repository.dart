@@ -11,7 +11,7 @@ class HealthNetRepository{
   HealthNetRepository._private(this.users, this.patients, this.devices);
 
   factory HealthNetRepository(String authToken){
-    HealthNetRepository._private(UsersRepository(authToken),PatientsRepository(authToken),DevicesRepository(authToken));
+    return HealthNetRepository._private(UsersRepository(authToken),PatientsRepository(authToken),DevicesRepository(authToken));
   }
 
   Future<bool> init() async {

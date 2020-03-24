@@ -7,7 +7,7 @@ class DevicesAPInHandler {
   ///
   static Future<http.Response> getDevicesByPatientID(
       String uuid, String authToken) async {
-    return await http.get(APIInterfaces.getDevicesURl() + "?patientId=" + uuid,
-        headers: {HttpHeaders.authorizationHeader: "Bearer " + authToken});
+    return await http.get("https://"+APIInterfaces.getDevicesURl() + "?patientId=" + uuid,
+        headers: {HttpHeaders.authorizationHeader:authToken});
   }
 }

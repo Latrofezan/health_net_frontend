@@ -15,7 +15,7 @@ class AuthenticationUnauthenticated extends AuthenticationState {
   AuthenticationUnauthenticated(this.lastEmail);
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
 class AuthenticationAuthenticated extends AuthenticationState{
@@ -25,7 +25,7 @@ class AuthenticationAuthenticated extends AuthenticationState{
   AuthenticationAuthenticated(this.healthNetRepository, this.email);
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [];
   
 }
 
@@ -38,4 +38,9 @@ class AuthenticationFailed extends AuthenticationState{
   @override
   List<Object> get props =>[statusCode];
   
+}
+
+class AuthenticationValidating extends AuthenticationState {
+  @override
+  List<Object> get props => [];
 }

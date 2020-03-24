@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_net_frontend/blocs/authentication/authentication_bloc.dart';
-import 'package:health_net_frontend/components/ui/loading_dialog/loading_dialog.dart';
 import 'package:health_net_frontend/screens/login_screen/components/ui/login_form/components/email_textfield.dart';
 import 'package:health_net_frontend/screens/login_screen/components/ui/login_form/components/password_textfield.dart';
 
 class LoginForm extends StatefulWidget {
-  final int height;
-  final int width;
+  final double height;
+  final double width;
   final String initialMailBoxValue;
 
   const LoginForm({Key key, this.height, this.width, this.initialMailBoxValue})
@@ -26,7 +25,6 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-    //TO CHECK
     _emailController.text = widget.initialMailBoxValue ?? "";
     _rememberMe = _emailController.text.isNotEmpty;
   }
@@ -37,7 +35,9 @@ class _LoginFormState extends State<LoginForm> {
         height: widget.height ?? 400,
         width: widget.width ?? 300,
         decoration: BoxDecoration(
-          border: Border.all(color:Theme.of(context).backgroundColor,width:3),
+          color: Colors.black38,
+          border:
+              Border.all(color: Theme.of(context).backgroundColor, width: 3),
           borderRadius: BorderRadius.circular(32),
         ),
         child: Center(
@@ -49,15 +49,14 @@ class _LoginFormState extends State<LoginForm> {
               children: <Widget>[
                 //Email Input field
                 Padding(
-                  padding: EdgeInsets.only(left:10,right:10),
-                  child:EmailTextfield(_emailController),
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: EmailTextfield(_emailController),
                 ),
                 //Password Input Field
                 Padding(
-                  padding: EdgeInsets.only(left:10,right:10),
-                  child:PasswordTextField(_passwordController),
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: PasswordTextField(_passwordController),
                 ),
-
 
                 CheckboxListTile(
                     activeColor: Theme.of(context).accentColor,
@@ -79,12 +78,11 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        LoadingDialog.show(context);
                         BlocProvider.of<AuthenticationBloc>(context).add(
                             LoginRequest(_emailController.text,
                                 _passwordController.text, _rememberMe));
                       }
-                    }),
+                    })
               ],
             ),
           ),

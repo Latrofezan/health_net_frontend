@@ -8,7 +8,7 @@ import 'package:health_net_frontend/models/user.dart';
 class UsersManagementHandler {
   ///Retrieve the users list from Health-Net API.
   static Future<http.Response> fetchUsersList(String authToken) async {
-    return await http.get(APIInterfaces.geUsersURl(),
+    return await http.get(APIInterfaces.getUsersURl(),
         headers: {HttpHeaders.authorizationHeader: "Bearer " + authToken});
   }
 
@@ -21,7 +21,7 @@ class UsersManagementHandler {
       "fullName": user.name
     };
 
-    return await http.post(APIInterfaces.geUsersURl(),
+    return await http.post("https://"+APIInterfaces.getUsersURl(),
         body: json.encode(credentials),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",

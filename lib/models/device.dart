@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 
 import 'device_node.dart';
 
-class Device extends Equatable{
+class Device extends Equatable {
   final String id;
   final String homie;
   final String name;
@@ -13,15 +13,14 @@ class Device extends Equatable{
 
   Device(this.id, this.homie, this.name, this.state, this.nodes);
 
-    factory Device.fromJSon(dynamic json) =>
-      Device(
-        json['id'] as String,
-        json['homie'] as String,
-        json['name'] as String,
-        json['state'] as String,
-        (jsonDecode(json['nodes']) as List).map((node) => DeviceNode.fromJSon(node))
-        );
+  factory Device.fromJSon(dynamic json) => Device(
+      json['id'] as String,
+      json['homie'] as String,
+      json['name'] as String,
+      json['state'] as String,
+      (json['nodes'] as List).map((node) => DeviceNode.fromJSon(node)).toList()
+      );
 
   @override
-  List<Object> get props =>[id, homie, name, state];
+  List<Object> get props => [id, homie, name, state];
 }

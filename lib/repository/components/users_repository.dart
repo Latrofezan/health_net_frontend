@@ -16,15 +16,24 @@ class UsersRepository{
     return UsersRepository._private(authToken,List<User>());
   }
 
-  Future<bool> add(User user) {
-    // TODO: implement add
-    return null;
+  Future<int> add(User user, String password) async{
+    int result=0;
+    try{
+      await UsersManagementHandler.registerNewUser(user, password, authToken).then(
+        (http.Response response){
+          result=response.statusCode;
+          if(response.statusCode>=200&&response.statusCode<400)
+              _users.add(user);
+        }
+      );
+    }on SocketException catch(excep){return excep.osError.errorCode;}
+    return result;
   }
 
   Future<int> fetch() async{
     int result =0;
     try{
-    UsersManagementHandler.fetchUsersList(authToken).then(
+    await UsersManagementHandler.fetchUsersList(authToken).then(
       (http.Response response){
       result=response.statusCode;
       if(response.statusCode>=200&&response.statusCode<400)
@@ -46,5 +55,9 @@ class UsersRepository{
   Future<bool> remove(User user) {
     // TODO: implement remove
     return null;
+  }
+
+  bool isEmpty(){
+    return _users.isEmpty;
   }
 }

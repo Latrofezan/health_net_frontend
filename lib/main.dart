@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_net_frontend/blocs/authentication/authentication_bloc.dart';
+import 'package:health_net_frontend/blocs/main_screen/bloc/main_screen_bloc.dart';
 import 'package:health_net_frontend/screens/login_screen/login_screen.dart';
 import 'package:health_net_frontend/screens/main_screen/components/arguments/main_screen_arguments.dart';
 import 'package:health_net_frontend/screens/main_screen/main_screen.dart';
@@ -25,7 +26,7 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 }
 
-void main(){
+void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(MyApp());
 }
@@ -42,8 +43,8 @@ class MyApp extends StatelessWidget {
             {
               return MaterialPageRoute(builder: (context) {
                 return BlocProvider(
-                  create: (BuildContext context)=>AuthenticationBloc(),
-                  child:LoginScreen());
+                    create: (BuildContext context) => AuthenticationBloc(),
+                    child: LoginScreen());
               });
             }
             break;
@@ -52,7 +53,9 @@ class MyApp extends StatelessWidget {
             {
               final MainScreenArguments args = settings.arguments;
               return MaterialPageRoute(builder: (context) {
-                return MainScreen(args.email, args.repository);
+                return BlocProvider(
+                  create: (BuildContext context)=>MainScreenBloc(args.repository),
+                  child:MainScreen(args.email));
               });
             }
             break;

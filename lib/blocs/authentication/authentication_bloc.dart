@@ -25,8 +25,8 @@ class AuthenticationBloc
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     String lastEmail = sharedPreferences.getString('lastEmail') ?? "";
-
     if (event is AppStarted) {
+      yield AuthenticationValidating();
       String existingToken = await secureStorage.read(key: 'authToken');
       if (["", null].contains(existingToken)) {
         yield AuthenticationUnauthenticated(lastEmail);
@@ -37,6 +37,7 @@ class AuthenticationBloc
     }
 
     if (event is LoginRequest) {
+      yield AuthenticationValidating();
       try {
         final String authToken =
             await AuthenticationHandler.sendAuthenticationRequest(
@@ -45,7 +46,7 @@ class AuthenticationBloc
         if (event.rememberMe)
           await sharedPreferences.setString('lastEmail', event.email);
         //saving the token in keychain/keystore
-        await secureStorage.write(key: 'authToken', value: authToken);
+        await secureStorage.write(key: 'authToken', value:"Bearer "+authToken);
         //saving the email in keychain/keystore
         await secureStorage.write(key: 'authMail', value: event.email);
         yield AuthenticationAuthenticated(

@@ -11,5 +11,6 @@ class APIInterfaces{
   static String getAuthenticationURl()=>_interfaces["authentication"];
   static String getPatientsURl()=>_interfaces["patients"];
   static String getDevicesURl()=>_interfaces["devices"];
-  static String geUsersURl()=>_interfaces["users"];
+  static String getUsersURl()=>_interfaces["users"];
+  static String getUrl()=>_url;
 }

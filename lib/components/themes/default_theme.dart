@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class HealthNetDefaultTheme{
   static var theme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.indigo,
+    primaryColor: Colors.indigo[800],
     primaryColorLight: Colors.cyan,
-    accentColor: Colors.green,
+    accentColor: Colors.lightGreenAccent[700],
     backgroundColor: Colors.white,
     disabledColor: Colors.grey,
     errorColor: Colors.orange,
+    buttonColor: Colors.greenAccent[700],
 
-    buttonColor: Colors.green,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.indigo,
@@ -27,7 +27,7 @@ class HealthNetDefaultTheme{
       ),
 
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color:Colors.lightGreen,width: 3),
+        borderSide: BorderSide(color:Colors.lightGreenAccent[700],width: 3),
         borderRadius: BorderRadius.circular(25),
       ),
 
@@ -47,7 +47,6 @@ class HealthNetDefaultTheme{
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.normal,
     shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25.0)),
-    
   )
     );
 }
