@@ -76,7 +76,7 @@ class _PatientCardState extends State<DeviceNodeCard> {
           children:widget.deviceNode.properties.map(
             (property)=>Padding(
               padding: EdgeInsets.all(4),
-              child: DeviceNodePropertyCard(widget.deviceId, widget.deviceNode.id, property,widget.authToken)
+              child: DeviceNodePropertyCard(widget.deviceId, widget.deviceNode.id,widget.authToken,property)
               )
             ).toList()
         ));
