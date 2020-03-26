@@ -13,26 +13,36 @@ import 'package:health_net_frontend/screens/main_screen/components/ui/logout_dia
 import 'components/patients/patients_screen.dart';
 
 class MainScreenConsumer extends StatelessWidget {
+  final String _authEmail;
+
+  const MainScreenConsumer(this._authEmail, {Key key}) : super(key: key);
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return WillPopScope(child:
         BlocBuilder<MainScreenBloc, MainScreenState>(builder: (context, state) {
       if (state is PatientsScreenSelected) {
-        var bloc =PatientsBloc(state.patientRepository, state.devicesRepository);
+        var bloc =
+            PatientsBloc(state.patientRepository, state.devicesRepository);
         bloc.add(PatientsFetchingRequired(false));
         return BlocProvider(
-          create: (context)=>bloc,
+          create: (context) => bloc,
           child: PatientsScreen(
-              MediaQuery.of(context).size.height,
-              MediaQuery.of(context).size.width,),
+            MediaQuery.of(context).size.height,
+            MediaQuery.of(context).size.width,
+          ),
         );
       }
 
       if (state is UsersScreenSelected) {
+        var bloc = UsersBloc(state.usersRepository, _authEmail);
+        bloc.add(UsersFetchingRequired(false));
         return BlocProvider(
-          create:(context)=>UsersBloc(state.usersRepository),
-          child: UsersScreen(),
-          );
+          create: (context) => bloc,
+          child: UsersScreen(
+            MediaQuery.of(context).size.height,
+            MediaQuery.of(context).size.width,
+          ),
+        );
       }
     }), onWillPop: () async {
       var result = await LogoutDialog.show(context);
@@ -44,7 +54,5 @@ class MainScreenConsumer extends StatelessWidget {
       }
       return false;
     });
-}
-
-
+  }
 }

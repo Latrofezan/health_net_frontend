@@ -7,7 +7,7 @@ class HealthNetDefaultTheme{
     primaryColorLight: Colors.cyan,
     accentColor: Colors.lightGreenAccent[700],
     backgroundColor: Colors.white,
-    disabledColor: Colors.grey,
+    disabledColor: Colors.blueGrey,
     errorColor: Colors.orange,
     buttonColor: Colors.greenAccent[700],
 

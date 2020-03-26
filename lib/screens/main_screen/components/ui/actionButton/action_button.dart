@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_net_frontend/blocs/main_screen/bloc/main_screen_bloc.dart';
 import 'package:health_net_frontend/screens/main_screen/components/consumer/components/patients/components/registration/patients_registration_dialog.dart';
+import 'package:health_net_frontend/screens/main_screen/components/consumer/components/users/components/registration/users_registration_dialog.dart';
 
 
 class HealthNetActionButton extends StatelessWidget{
@@ -24,7 +25,9 @@ class HealthNetActionButton extends StatelessWidget{
            return FloatingActionButton(
           child: Icon(Icons.add,size: 40, color: Theme.of(context).backgroundColor,),
           backgroundColor: Theme.of(context).accentColor,
-          onPressed:(){},
+          onPressed:()async{
+            await UserRegistrationDialog(context).show(state.usersRepository);
+          },
         );
         }
       });

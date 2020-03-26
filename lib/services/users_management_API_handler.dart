@@ -8,8 +8,8 @@ import 'package:health_net_frontend/models/user.dart';
 class UsersManagementHandler {
   ///Retrieve the users list from Health-Net API.
   static Future<http.Response> fetchUsersList(String authToken) async {
-    return await http.get(APIInterfaces.getUsersURl(),
-        headers: {HttpHeaders.authorizationHeader: "Bearer " + authToken});
+    return await http.get("https://"+APIInterfaces.getUsersURl(),
+        headers: {HttpHeaders.authorizationHeader:authToken});
   }
 
   ///Asks for a user registration to Health-Net API.
@@ -25,7 +25,7 @@ class UsersManagementHandler {
         body: json.encode(credentials),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
-          HttpHeaders.authorizationHeader: "Bearer " + authTok
+          HttpHeaders.authorizationHeader:authTok
         });
   }
 

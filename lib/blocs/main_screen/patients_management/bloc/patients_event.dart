@@ -8,7 +8,6 @@ class PatientsFetchingRequired  extends PatientsEvent{
   final bool refresh;
   PatientsFetchingRequired(this.refresh);
   @override
-  // TODO: implement props
-  List<Object> get props => null;
+    List<Object> get props => null;
   
 }

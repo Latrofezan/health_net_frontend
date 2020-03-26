@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:health_net_frontend/blocs/main_screen/patients_management/bloc/patients_bloc.dart';
-import 'package:health_net_frontend/blocs/main_screen/users_management/bloc/users_bloc.dart';
 import 'package:health_net_frontend/repository/components/devices_repository.dart';
 import 'package:health_net_frontend/repository/components/patients_repository.dart';
 import 'package:health_net_frontend/repository/components/users_repository.dart';

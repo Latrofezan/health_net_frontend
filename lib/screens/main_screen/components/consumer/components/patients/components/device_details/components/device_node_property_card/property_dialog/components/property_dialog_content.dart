@@ -34,7 +34,7 @@ class PropertyDialogContent extends StatefulWidget {
         authToken,
         IOWebSocketChannel.connect(
             "ws://" +
-                APIInterfaces.getDevicesURl() +
+                APIInterfaces.getDevicesWebSocketsURl() +
                 "/" +
                 deviceId +
                 "/" +
@@ -45,7 +45,7 @@ class PropertyDialogContent extends StatefulWidget {
         (nodeProperty.settable)
             ? IOWebSocketChannel.connect(
                 "ws://" +
-                    APIInterfaces.getDevicesURl() +
+                    APIInterfaces.getDevicesWebSocketsURl() +
                     "/" +
                     deviceId +
                     "/" +
@@ -65,6 +65,14 @@ class _PropertyDialogContentState extends State<PropertyDialogContent> {
 
   @override
   void initState() {
+    print( "ws://" +
+                APIInterfaces.getDevicesWebSocketsURl() +
+                "/" +
+                widget.deviceId +
+                "/" +
+                widget.deviceNodeId +
+                "/" +
+                widget.property.id,);
     _values = Queue<String>();
     _values.add("");
     super.initState();

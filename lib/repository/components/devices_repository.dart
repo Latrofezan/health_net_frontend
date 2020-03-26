@@ -58,4 +58,8 @@ class DevicesRepository {
   bool isEmpty() {
     return _devices.isEmpty;
   }
+
+  void clear(){
+    _devices.clear();
+  }
 }

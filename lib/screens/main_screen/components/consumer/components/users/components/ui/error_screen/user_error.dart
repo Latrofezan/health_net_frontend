@@ -1,12 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_net_frontend/blocs/main_screen/patients_management/bloc/patients_bloc.dart';
+import 'package:health_net_frontend/blocs/main_screen/users_management/bloc/users_bloc.dart';
 
-class PatientsConnectionError extends StatelessWidget {
+class UsersErrorScreen extends StatelessWidget {
   final int code;
 
-  const PatientsConnectionError(this.code, {Key key}) : super(key: key);
-  @override
+  const UsersErrorScreen(this.code, {Key key}) : super(key: key);
+
   Widget build(BuildContext context) {
     return Center(
         child: Column(
@@ -42,13 +43,13 @@ class PatientsConnectionError extends StatelessWidget {
           Padding(
               padding: EdgeInsets.all(20),
               child: FlatButton(
-                padding: EdgeInsets.symmetric(vertical:8, horizontal:40),
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                   child: Icon(Icons.refresh,
                       size: 40, color: Theme.of(context).backgroundColor),
                   color: Theme.of(context).errorColor,
                   onPressed: () {
-                    BlocProvider.of<PatientsBloc>(context)
-                        .add(PatientsFetchingRequired(true));
+                    BlocProvider.of<UsersBloc>(context)
+                        .add(UsersFetchingRequired(true));
                   })),
         ]));
   }

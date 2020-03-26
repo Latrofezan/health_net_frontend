@@ -6,7 +6,6 @@ import 'package:health_net_frontend/components/ui/loading_dialog/loading_dialog.
 import 'package:health_net_frontend/screens/main_screen/components/consumer/components/patients/components/ui/app_bar.dart';
 import 'package:health_net_frontend/screens/main_screen/components/consumer/components/patients/components/ui/error_screen/error_screen.dart';
 import 'package:health_net_frontend/screens/main_screen/components/consumer/components/patients/components/ui/patients_card_list/patients_card_list.dart';
-import 'package:health_net_frontend/screens/main_screen/components/consumer/components/patients/components/ui/unfetched_devices/unfetched_devices_dialog.dart';
 
 class PatientsScreenConsumer extends StatelessWidget {
   @override

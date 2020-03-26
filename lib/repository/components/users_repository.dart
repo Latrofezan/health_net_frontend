@@ -19,13 +19,10 @@ class UsersRepository{
   Future<int> add(User user, String password) async{
     int result=0;
     try{
-      await UsersManagementHandler.registerNewUser(user, password, authToken).then(
-        (http.Response response){
-          result=response.statusCode;
+      var response=await UsersManagementHandler.registerNewUser(user, password, authToken);
+       result=response.statusCode;
           if(response.statusCode>=200&&response.statusCode<400)
               _users.add(user);
-        }
-      );
     }on SocketException catch(excep){return excep.osError.errorCode;}
     return result;
   }
@@ -33,20 +30,22 @@ class UsersRepository{
   Future<int> fetch() async{
     int result =0;
     try{
-    await UsersManagementHandler.fetchUsersList(authToken).then(
-      (http.Response response){
-      result=response.statusCode;
+    var response=await UsersManagementHandler.fetchUsersList(authToken);
+    result=response.statusCode;
       if(response.statusCode>=200&&response.statusCode<400)
         {
         var usersJson = jsonDecode(response.body) as List;
-        return usersJson.map((user) => User.fromJSon(user)).toList();
+        var fetched=usersJson.map((user) => User.fromJSon(user)).toList();
+        _users.clear();
+        _users.addAll(fetched);
         }
-      }
-    );
     }on SocketException catch(excep){return excep.osError.errorCode;}
     return result;
   }
 
+  List<User> getAll(){
+    return _users;
+  }
 
   User get(String email) {
     return _users.firstWhere((user)=>user.email==email,orElse:()=>null);

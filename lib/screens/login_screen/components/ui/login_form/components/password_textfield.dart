@@ -56,34 +56,6 @@ class _PasswordVisibleElementState extends State<PasswordTextField> {
               Icon(_passwordVisible ? Icons.visibility : Icons.visibility_off,color: (_error)?Theme.of(context).errorColor:null,),
         ),
       ).applyDefaults(Theme.of(context).inputDecorationTheme), //,
-      /*decoration: InputDecoration(
-    hasFloatingPlaceholder: true,
-    filled: true,
-    fillColor: Colors.white.withOpacity(0.5),
-    labelText: "Password",
-    suffixIcon: GestureDetector(
-      onLongPress: () {
-        setState(() {
-          _passwordVisible = true;
-        });
-      },
-      onLongPressUp: () {
-        setState(() {
-          _passwordVisible = false;
-        });
-      },
-      child: Icon(
-          _passwordVisible ? Icons.visibility : Icons.visibility_off),
-    ),
-  ),
-  validator: (String value) {
-    if (value.isEmpty) {
-      return "*Password needed";
-    }
-  },
-  onSaved: (String value) {
-    _setPassword(value);
-  },*/
     );
   }
 }

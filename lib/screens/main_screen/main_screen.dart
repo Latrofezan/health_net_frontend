@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget{
       //BLoC needed
       body:BlocProvider.value(
         value: BlocProvider.of<MainScreenBloc>(context),
-        child:MainScreenConsumer()),
+        child:MainScreenConsumer(_email)),
 
       bottomNavigationBar:BlocProvider.value(
         value: BlocProvider.of<MainScreenBloc>(context),

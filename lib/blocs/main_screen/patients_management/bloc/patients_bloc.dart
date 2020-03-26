@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:health_net_frontend/models/device.dart';
 import 'package:health_net_frontend/models/patient.dart';
 import 'package:health_net_frontend/repository/components/devices_repository.dart';
 import 'package:health_net_frontend/repository/components/patients_repository.dart';
@@ -24,7 +23,6 @@ class PatientsBloc extends Bloc<PatientsEvent, PatientsState> {
     PatientsEvent event,
   ) async* {
     if (event is PatientsFetchingRequired) {
-      var devicesFetchingResult = Map<Patient, int>();
       int patientsFetchingResult;
       bool netRequired = true;
       if (!event.refresh) {
@@ -36,6 +34,7 @@ class PatientsBloc extends Bloc<PatientsEvent, PatientsState> {
       if (netRequired) {
         yield PatientsFetching();
         patientsFetchingResult = await patientsRepository.fetch();
+        devicesRepository.clear();
         if (patientsFetchingResult >= 200 && patientsFetchingResult < 400) {
           yield PatientsFetchingSuccess(patientsRepository.getAll(),
               TextEditingController());

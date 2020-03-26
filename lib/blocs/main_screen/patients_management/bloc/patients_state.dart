@@ -32,7 +32,6 @@ class PatientsFetchingSuccess extends PatientsState{
   
   PatientsFetchingSuccess(this.patients, this.searchBarController);
   @override
-  // TODO: implement props
   List<Object> get props => [patients,searchBarController];
   
 }
